@@ -13,7 +13,6 @@ public class FinalWebProjectApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FinalWebProjectApplication.class, args);
 		
-
 	}
 	
 }

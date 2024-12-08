@@ -12,6 +12,6 @@ import thanhluu.entity.UserEntity;
 public interface IOrderRepository extends JpaRepository<OrderEntity, Long>{
 
 	
-	
+	public List<OrderEntity> findByUser(UserEntity user);
 	
 }

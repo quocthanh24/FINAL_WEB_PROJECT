@@ -63,6 +63,9 @@ public class ShoppingCartServiceImpl implements IShoppingCartService{
 	public void addProductToCart(ShoppingCartEntity cart, Long productId, int quantity) {
 		// TODO Auto-generated method stub
 		// Kiểm tra nếu sản phẩm đã có trong giỏ hàng
+		
+		
+		
         Optional<CartItemEntity> existingItem = cart.getCartItems().stream()
                 .filter(item -> item.getProduct().getId().equals(productId))
                 .findFirst();

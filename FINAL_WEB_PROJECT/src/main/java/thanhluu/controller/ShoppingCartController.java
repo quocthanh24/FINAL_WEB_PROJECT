@@ -1,6 +1,7 @@
 package thanhluu.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -183,29 +184,48 @@ public class ShoppingCartController {
 	    						HttpSession session) {
 	    	
 	    	UserEntity user = (UserEntity) session.getAttribute("user");
+	    	OrderEntity order = (OrderEntity) session.getAttribute("order");
 	    	
 	    	if (user == null) {
 	    		return "redirect:/login";
 	    	}
+	    	
+	    	if (order == null) {
+            	
+            	//Tạo order nếu 0 áp mã giảm giá
+            	order = new OrderEntity();
+
+	            order.setUser(user);
+	            order.setOrderDate(java.sql.Date.valueOf(LocalDate.now()));
+	            iOrderService.save(order);	 
+            }
 	    	
 	    	// Lấy giỏ hàng từ session (hoặc từ cơ sở dữ liệu nếu cần)
 	        Optional<ShoppingCartEntity> optionalShoppingCart = shoppingCartService.findByUserId(user.getId());
 	        
 	        if (!optionalShoppingCart.isPresent()) {
 	            ShoppingCartEntity shoppingcart = new ShoppingCartEntity();
+	            List<CartItemEntity> list_cartItem = new ArrayList<CartItemEntity>();
 	            shoppingcart.setUser(user);
-	            shoppingCartService.addProductToCart(shoppingcart, productId, quantity);
+	            shoppingcart.setCartItems(list_cartItem);
 	            shoppingCartService.save(shoppingcart);
+	            shoppingCartService.addProductToCart(shoppingcart, productId, quantity);
+	            
 	            session.setAttribute("shoppingCart", shoppingcart); // Set giỏ hàng vào session nếu chưa có
 	           
-	        }
+
+	            order.setShoppingCart(shoppingcart);
+	            iOrderService.save(order);	
+         
+	            
+	        }	
 	        else {
-	        	
+	        	// Thêm sản phẩm vào giỏ hàng
 	        	shoppingCartService.addProductToCart(optionalShoppingCart.get(), productId, quantity);
-     	
+	        	
 	        }
-	        // Thêm sản phẩm vào giỏ hàng
-	       
+	        
+	        session.setAttribute("order", order);
 	        
 	        return "redirect:/cart";
 	  

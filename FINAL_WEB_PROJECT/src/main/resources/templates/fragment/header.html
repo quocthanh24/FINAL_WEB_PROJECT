@@ -27,7 +27,7 @@
 									</button>
 									<div class="dropdown-content">
 										<a href="/profile">Thông Tin</a> 
-										<a href="/orders">Orders</a>
+										
 										<a href="/logout">Đăng Xuất</a>
 									</div>
 								</div>
@@ -52,22 +52,11 @@
 			<div class="col-lg-6">
 				<nav class="header__menu">
 					<ul>
-						<li class="active"><a href="/home">Home</a>
-							<ul class="header__menu__dropdown">
-								<li><a href="./shop-details.html">Shop Details</a></li>
-								<li><a href="./shoping-cart.html">Shoping Cart</a></li>
-								<li><a href="./checkout.html">Check Out</a></li>
-								<li><a href="./blog-details.html">Blog Details</a></li>
-							</ul>
-						</li>
-						<li><a href="/shop">Shop</a></li>
-						<li><a href="#">Pages</a>
-							<ul class="header__menu__dropdown">
-								<li><a href="./shop-details.html">Shop Details</a></li>
-								<li><a href="./shoping-cart.html">Shoping Cart</a></li>
-								<li><a href="./checkout.html">Check Out</a></li>
-								<li><a href="./blog-details.html">Blog Details</a></li>
-							</ul></li>
+						<li class="active"><a href="/home">Home</a></li>
+						<li th:if="${session.user != null}"><a href="/shop">Shop</a></li>
+						<!-- Hiển thị nếu user == null -->
+						<li th:if="${session.user == null}"><a href="/login">Shop</a></li>
+						<li th:if="${session.user != null}"><a th:href="@{/ordertracking}">Order Tracking</a></li>
 							
 						<li class="active" th:if="${session.role == 'Manager'}"><a>Management</a>
 							<ul class="header__menu__dropdown">
@@ -78,11 +67,13 @@
 					
 							</ul>
 						</li>
+						<!--  
 						<li><a href="./contact.html">Contact</a></li>
+						-->
 					</ul>
 				</nav>
 			</div>
-			<div class="col-lg-3">
+			<div class="col-lg-3"  th:if="${session.user != null}">
 				<div class="header__cart">
 					<ul>
 						<li><a href="/wishlist"><i class="fa fa-heart"></i> <span>1</span></a></li>

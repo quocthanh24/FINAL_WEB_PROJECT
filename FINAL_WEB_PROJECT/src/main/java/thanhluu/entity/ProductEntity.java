@@ -21,7 +21,7 @@ public class ProductEntity {
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "name", nullable = false)
+	@Column(name = "name", nullable = false,  columnDefinition = "NVARCHAR(255)")
 	private String name;
 
 	@Column(name = "price", nullable = false)
@@ -34,7 +34,7 @@ public class ProductEntity {
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ProductImageEntity> productImages; // Danh sách ảnh của sản phẩm
 
-	@Column(name = "description")
+	@Column(name = "description",  columnDefinition = "NVARCHAR(255)")
 	private String description;
 
 	@Column(name = "available")

@@ -20,8 +20,9 @@
 
     <div th:replace="~{fragment/header :: header}"></div>
     <div class="add-product-container">
-        <h1>Add New Product</h1>
+        
         <form th:action="@{/manager/products/add}" method="post">
+        	<h2>Add New Product</h2>
             <!-- Product Name -->
             <label for="name">Product Name:</label>
             <input type="text" id="name" name="name" required>

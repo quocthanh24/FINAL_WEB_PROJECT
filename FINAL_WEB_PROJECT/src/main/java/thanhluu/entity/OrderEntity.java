@@ -31,8 +31,9 @@ public class OrderEntity {
 	@JoinColumn(name = "user_id")
 	private UserEntity user;
 
-//	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL) // Cập nhật mối quan hệ
-//    private OrderDetailEntity orderDetail;
+	@OneToOne(cascade = CascadeType.ALL)  // Cascade to persist orderDetail when order is saved
+    @JoinColumn(name = "order_detail_id")  // Foreign key to OrderDetailEntity
+    private OrderDetailEntity orderDetail;
 
 	@OneToOne(cascade = CascadeType.ALL) // Chuyển sang OneToOne
     @JoinColumn(name = "shipper_id")
