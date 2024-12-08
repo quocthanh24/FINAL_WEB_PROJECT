@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zxx"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ogani | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/elegant-icons.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/nice-select.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/slicknav.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+
+<style>
+/* Style for the review section */
+.product__details__reviews__add {
+    margin-top: 30px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 80%; /* Điều chỉnh chiều rộng của form */
+    max-width: 800px; /* Tối đa chiều rộng */
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 15px; /* Điều chỉnh padding để form không quá dài */
+}
+
+/* Style for form elements */
+.product__details__reviews__add form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Rating dropdown */
+.product__details__reviews__add select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px; /* Giảm khoảng cách giữa các phần tử */
+    font-size: 14px;
+}
+.product__details__reviews__add label{
+	margin-left: 20px;
+	margin-top: 7px;
+}
+/* Textarea for the comment */
+.product__details__reviews__add textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    height: 80px; /* Giảm chiều cao của textarea */
+    resize: none;
+    margin-bottom: 10px; /* Giảm khoảng cách giữa các phần tử */
+}
+
+/* Button */
+.product__details__reviews__add button {
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%; /* Làm nút rộng đầy đủ form */
+}
+
+.product__details__reviews__add button:hover {
+    background-color: #e65c50;
+}
+
+/* Displaying messages */
+.alert-info {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+/* Style for the cart and wishlist section */
+.product__details__cart {
+    display: flex; /* Sử dụng Flexbox để các nút nằm ngang */
+    gap: 10px; /* Khoảng cách giữa các nút */
+    align-items: center; /* Căn chỉnh các nút theo chiều dọc */
+}
+
+/* Wrapper for both forms */
+.product__details__actions {
+    display: flex; /* Sử dụng Flexbox */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    gap: 10px; /* Khoảng cách giữa các form */
+}
+
+/* Add spacing and alignment to buttons */
+.cart-form .primary-btn,
+.wishlist-form .wishlist-btn {
+    margin: 0; /* Loại bỏ khoảng cách mặc định */
+    padding: 10px 20px; /* Căn chỉnh kích thước */
+    font-size: 14px;
+}
+
+/* Wishlist button styling */
+.wishlist-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.wishlist-btn:hover {
+    background-color: #f1f1f1;
+}
+
+
+</style>
+
+</head>
+
+<body>
+    <div th:replace="~{fragment/header :: header}"></div>
+
+    
+
+    
+
+    
+
+   
+
+	<!-- Product Details Section Begin -->
+	<section class="product-details spad">
+	    <div class="container">
+	        <div class="row">
+	            <!-- Product Images -->
+	            <div class="col-lg-6 col-md-6">
+	                <div class="product__details__pic">
+	                    <div class="product__details__pic__item">
+	                        <!-- Main Product Image -->
+	                        <img class="product__details__pic__item--large"
+	                             th:src="@{${product.productImages.get(0).imageUrl}}"
+	                             alt="Product Image">
+	                    </div>
+	                    
+	                </div>
+	            </div>
+	            
+	            <!-- Product Details -->
+	            <div class="col-lg-6 col-md-6">
+	                <div class="product__details__text">
+	                    <h3 th:text="${product.name}">Product Name</h3>
+	
+	                    <!-- Product Rating -->
+	                    <div class="product__details__rating">
+	                        <span th:each="i : ${#numbers.sequence(1, 5)}">
+	                            <i class="fa fa-star" th:classappend="checked" th:if="${i <= averageRating}"></i>
+
+
+	                        </span>
+	                        <!--  
+	                        
+	                        <span th:text="'(' + ${product.ratings.size()} + ' reviews)'">18 reviews</span>
+	                        
+	                        -->
+	                    </div>
+	                    
+	                    <!-- Product Price -->
+	                    <div class="product__details__price">
+	                        <span th:text="${product.price} + ' VND'">Price</span>
+	                    </div>
+	
+						
+						
+	                    <!-- Product Description -->
+	                    <p th:text="${product.description}">Product description goes here.</p>
+	
+	                    
+
+	
+	                    <!-- Add to Cart Button
+	                    <a th:href="@{/cart/add}" class="primary-btn">ADD TO CART</a>
+	
+						-->
+						
+						<div class="product__details__actions">
+						    <form th:action="@{/cart/add}" method="post" class="cart-form">
+						        <!-- Product Quantity Selector -->
+						        <div class="product__details__quantity">
+						            <div class="quantity">
+						                <div class="pro-qty">
+						                    <input type="text" name="quantity" value="1">
+						                </div>
+						            </div>
+						        </div>
+						        
+						        <input type="hidden" name="productId" th:value="${product.id}" />
+						        <button type="submit" class="primary-btn">ADD TO CART</button>
+						    </form>
+						
+						    <form th:action="@{/wishlist/add}" method="post" class="wishlist-form">
+						        <input type="hidden" name="productId" th:value="${product.id}"/>
+						        <button type="submit" class="wishlist-btn">
+						            <i class="fa fa-heart"></i>
+						        </button>
+						    </form>
+						</div>
+	
+	                    <!-- Product Availability and Shipping Information -->
+	                    <ul>
+	                        <li><b>Availability</b> <span class="availability" th:text="${product.available ? 'In Stock' : 'Out of Stock'}">In Stock</span></li>
+	                       
+	                    </ul>
+	                </div>
+	            </div>
+	            
+	            <!-- Reviews Section -->
+	            <div class="col-lg-12">
+	                <div class="product__details__tab">
+	                    <ul class="nav nav-tabs" role="tablist">
+	                        <li class="nav-item">
+	                            <a class="nav-link active" id="reviews-tab" data-toggle="tab" href="#tabs-3" role="tab" aria-selected="true">Reviews <span th:text="'(' + ${ratings.size()} + ')'">1</span></a>
+	                        </li>
+	                    </ul>
+	
+	                    <div class="tab-content">
+	                        <div class="tab-pane fade show active" id="tabs-3" role="tabpanel">
+	                            <div class="product__details__reviews">
+	                                <div th:each="rating : ${ratings}">
+	                                    <div class="product__details__reviews__item">
+	                                        <div class="reviews__item__text">
+	                                            <h5 th:text="${rating.user.username}">User Name</h5>
+	                                            
+	                                            <div class="reviews__item__rating">
+	                                                <span th:each="i : ${#numbers.sequence(1, 5)}">
+	                                                    <i class="fa fa-star" th:classappend="checked" th:if="${i <= averageRating}"></i>
+
+	                                                </span>
+	                                            </div>
+	                                            <p th:text="${rating.comment}">Review comment goes here.</p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	            
+	            <!-- Add Your Review Form -->
+                <div class="product__details__reviews__add">
+                    <h5>Add your review</h5>
+                    <form th:action="@{/product/rate/{id}(id=${product.id})}" method="post">
+                        <div class="form-group">
+                            <label for="rating">Rating</label>
+                            <select name="rating" id="rating" class="form-control">
+                                <option value="1">1 Star</option>
+                                <option value="2">2 Stars</option>
+                                <option value="3">3 Stars</option>
+                                <option value="4">4 Stars</option>
+                                <option value="5">5 Stars</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="comment">Comment</label>
+                            <textarea name="comment" id="comment" class="form-control" rows="4" placeholder="Write your comment"></textarea>
+                        </div>
+                        <button type="submit" class="primary-btn">Submit Review</button>
+                    </form>
+                </div>
+	
+	        </div>
+	    </div>
+	</section>
+
+    <!-- Product Details Section End -->
+
+    
+
+    <div th:replace="~{fragment/footer :: footer}"></div>
+
+    <!-- Js Plugins -->
+    <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery.nice-select.min.js}"></script>
+    <script th:src="@{/js/jquery-ui.min.js}"></script>
+    <script th:src="@{/js/jquery.slicknav.js}"></script>
+    <script th:src="@{/js/mixitup.min.js}"></script>
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+
+	
+
+</body>
+
+</html>

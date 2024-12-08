@@ -1,0 +1,106 @@
+
+body {
+	
+	font-family: Arial, sans-serif;
+}
+
+h2 {
+	text-align: center;
+	margin-top: 30px;
+}
+
+.table thead {
+	background-color: #7FAD39;
+	color: white;
+}
+
+.table-bordered th, .table-bordered td {
+	padding: 15px;
+	text-align: center; /* Căn giữa các item trong bảng */
+}
+
+/* Căn chỉnh và khoảng cách giữa các nút phân trang */
+.pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 20px 0;
+	gap: 10px; /* Khoảng cách giữa các nút */
+}
+
+/* Nút phân trang chung */
+.btn-pagination {
+	padding: 10px 20px;
+	font-size: 1rem;
+	font-weight: bold;
+	text-align: center;
+	background-color: #7FAD39; /* Màu chủ đạo */
+	border: none;
+	border-radius: 5px;
+	color: white;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+/* Hiệu ứng hover */
+.btn-pagination:hover {
+	background-color: #6f9d2a;
+	transform: scale(1.05); /* Phóng to nhẹ khi hover */
+}
+
+/* Nút phân trang bị disabled */
+.btn-pagination:disabled {
+	background-color: #e0e0e0;
+	color: #9e9e9e;
+	cursor: not-allowed;
+}
+
+/* Nút phân trang đang active */
+.btn-pagination.active {
+	background-color: #6f9d2a;
+	color: white;
+	border: 1px solid #6f9d2a;
+}
+
+/* Responsive: Thu nhỏ nút phân trang trên thiết bị nhỏ */
+@media ( max-width : 768px) {
+	.btn-pagination {
+		padding: 8px 12px;
+		font-size: 0.9rem;
+	}
+}
+
+.btn-action {
+	color: #fff;
+	background-color: #7FAD39;
+	border: none;
+	padding: 5px 10px;
+	margin: 0 5px;
+	cursor: pointer;
+}
+
+.btn-action:hover {
+	background-color: #6f9d2a;
+}
+
+.btn-add {
+	color: #fff;
+	background-color: #28a745;
+	border: none;
+	padding: 10px 20px;
+	margin-bottom: 20px; /* Tạo khoảng cách giữa nút Add và bảng */
+	cursor: pointer;
+	display: block;
+	width: 24%;
+}
+
+.btn-add:hover {
+	background-color: #218838;
+}
+
+/* Đặt lại kích thước container */
+.category-container {
+	max-width: 800px; /* Đặt chiều rộng tối đa */
+	margin: 0 auto; /* Căn giữa container */
+	padding: 20px; /* Thêm khoảng cách trong container nếu cần */
+}

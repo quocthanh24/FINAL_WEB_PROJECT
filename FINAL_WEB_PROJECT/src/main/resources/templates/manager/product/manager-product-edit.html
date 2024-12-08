@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en"
+		xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+    <link rel="stylesheet" href="/assets/css/manager/product/edit.css">
+    
+    <!-- Css Styles -->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/elegant-icons.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/nice-select.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/slicknav.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+</head>
+<body>
+
+	<div th:replace="~{fragment/header :: header}"></div>
+    <div class="edit-product-container">
+        <h1>Edit Product</h1>
+        <form th:action="@{/manager/products/edit/{id}(id=${product.id})}" method="post">
+            <input type="hidden" th:value="${product.id}" name="id">
+
+            <!-- Product Name -->
+            <label for="name">Product Name:</label>
+            <input type="text" id="name" name="name" th:value="${product.name}" required>
+
+            <!-- Price -->
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" th:value="${product.price}" step="0.01" required>
+
+            <!-- Quantity -->
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" th:value="${product.quantity}" required>
+
+            <!-- Description -->
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" th:text="${product.description}"></textarea>
+
+            <!-- Availability (Dropdown) -->
+            <label for="available">Availability:</label>
+            <select id="available" name="available">
+                <option value="true" th:selected="${product.available}">Available</option>
+                <option value="false" th:selected="${!product.available}">Unavailable</option>
+            </select>
+            
+            <!-- Image URLs -->
+            <div class="image-section">
+                <h2>Product Images</h2>
+                <div id="imageList">
+                    <!-- Loop through existing images -->
+                    <div class="image-preview" th:each="image : ${product.productImages}">
+                        <img th:src="${image.imageUrl}" alt="Product Image">
+                        <input type="text" name="imageUrls" th:value="${image.imageUrl}" placeholder="Enter image URL">
+                    </div>
+                </div>
+                <div class="add-image">
+                    <input type="text" id="imageUrl" placeholder="Enter new image URL">
+                    <button type="button" id="addImageBtn">Add Image</button>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+	<div th:replace="~{fragment/footer :: footer}"></div>
+    <script>
+        // Add new image URL dynamically
+        document.getElementById("addImageBtn").addEventListener("click", () => {
+            const urlInput = document.getElementById("imageUrl");
+            const url = urlInput.value.trim();
+            if (url) {
+                const imageList = document.getElementById("imageList");
+                const div = document.createElement("div");
+                div.className = "image-preview";
+                div.innerHTML = `
+                    <img src="${url}" alt="Product Image">
+                    <input type="text" name="imageUrls" value="${url}" placeholder="Enter image URL">
+                `;
+                imageList.appendChild(div);
+                urlInput.value = "";
+            }
+        });
+    </script>
+</body>
+</html>

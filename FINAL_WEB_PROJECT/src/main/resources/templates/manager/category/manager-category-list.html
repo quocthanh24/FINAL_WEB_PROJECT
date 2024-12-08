@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- Css Styles -->
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/elegant-icons.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/nice-select.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/slicknav.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+
+<link rel="stylesheet" th:href="@{/assets/css/manager/category/list.css}" type="text/css">
+</head>
+
+
+
+
+<body>
+	<div th:replace="~{fragment/header :: header}"></div>
+	
+	
+	<div class="category-container">
+		<h2>Category List</h2>
+
+		<!-- Nút Add -->
+		<a href="/manager/categories/add" class="btn-add">Add New Category</a>
+
+		<!-- Hiển thị danh sách các category -->
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Actions</th>
+					<!-- Cột Action -->
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="category : ${categories}">
+					<td th:text="${category.id}"></td>
+					<td th:text="${category.name}"></td>
+					<td th:text="${category.description}"></td>
+					<td>
+						<!-- Nút Edit --> <a
+						th:href="@{/manager/categories/edit/{id}(id=${category.id})}"
+						class="btn-action">Edit</a> <!-- Nút Delete --> <a
+						th:href="@{/manager/categories/delete/{id}(id=${category.id})}"
+						class="btn-action"
+						th:onclick="|return confirm('Are you sure you want to delete this category?');|">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<!-- Phân trang -->
+		<div class="pagination">
+			<!-- Previous button -->
+			<span th:if="${categories.hasPrevious()}">
+				<button class="btn btn-pagination"
+					th:onclick="|location.href='/manager/categories?page=' + (${currentPage - 1})|"
+					th:text="'Previous'"></button>
+			</span>
+
+			<!-- Page numbers -->
+			<span th:each="i : ${#numbers.sequence(1, totalPages)}">
+				<button class="btn btn-pagination"
+					th:onclick="|location.href='/manager/categories?page=' + (${i})|"
+					th:text="${i}"
+					th:classappend="${i == currentPage + 1} ? 'active' : ''"></button>
+			</span>
+
+			<!-- Next button -->
+			<span th:if="${categories.hasNext()}">
+				<button class="btn btn-pagination"
+					th:onclick="|location.href='/manager/categories?page=' + (${currentPage + 1})|"
+					th:text="'Next'"></button>
+			</span>
+		</div>
+	</div>
+	
+	
+	<div th:replace="~{fragment/footer :: footer}"></div>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en"
+		xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .otp-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .otp-inputs input {
+            width: 50px;
+            height: 50px;
+            font-size: 18px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .otp-inputs input:focus {
+            border-color: #7FED39;
+            box-shadow: 0 0 5px rgba(127, 237, 57, 0.5);
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #7FED39;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #6DD932;
+        }
+
+        .resend-otp {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .resend-otp a {
+            color: #7FED39;
+            text-decoration: none;
+        }
+
+        .resend-otp a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Verify OTP</h2>
+        <form id="otp-form" method="post" th:action="@{/verify-otp}">
+            <div class="otp-inputs">
+                <!-- 6 ô input cho mã OTP -->
+                <input type="text" maxlength="1" name="otp1" required>
+                <input type="text" maxlength="1" name="otp2" required>
+                <input type="text" maxlength="1" name="otp3" required>
+                <input type="text" maxlength="1" name="otp4" required>
+                <input type="text" maxlength="1" name="otp5" required>
+                <input type="text" maxlength="1" name="otp6" required>
+            </div>
+            <button type="submit">Verify OTP</button>
+        </form>
+        <!--  
+        <div class="resend-otp">
+            Didn't receive the code? <a href="#">Resend OTP</a>
+        </div>
+        -->
+    </div>
+
+    <script>
+        // Tự động chuyển đến ô tiếp theo khi nhập mã OTP
+        const inputs = document.querySelectorAll('.otp-inputs input');
+
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', () => {
+                if (input.value.length === 1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !input.value && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
+
+        // Ghép OTP từ các ô input trước khi submit
+        const form = document.getElementById('otp-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let otp = '';
+            inputs.forEach(input => otp += input.value);
+            console.log('OTP Entered:', otp); // Hiển thị mã OTP trong console (hoặc gửi đi xử lý)
+            form.submit(); // Gửi form sau khi hợp lệ
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+/* Tổng thể */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    background-color: #333; /* Màu tối cho footer */
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin-top: auto; /* Đẩy footer xuống dưới cùng */
+}
+
+/* Container Login */
+.login-container {
+    flex: 1; /* Chiếm khoảng trống giữa header và footer */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.login-box {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.textbox {
+    margin-bottom: 20px;
+}
+
+.textbox input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.btn {
+    background-color: #7FAD39; /* Màu chủ đạo */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn:hover {
+    background-color: #6e9c2f;
+}
+
+.register-link {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.register-link a {
+    color: #7FAD39;
+    text-decoration: none;
+    transition: none;
+}
+
+.register-link a:hover {
+	color: #7FAD39;
+    text-decoration: underline;
+}

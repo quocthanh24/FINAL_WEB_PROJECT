@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Add New Discount</title>
+
+<!-- Css Styles -->
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/elegant-icons.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/nice-select.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/slicknav.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+
+<link rel="stylesheet" th:href="@{/assets/css/manager/discount/add.css}" type="text/css">
+</head>
+<body>
+	<div th:replace="~{fragment/header :: header}"></div>
+	
+	<!-- Kiểm tra và hiển thị lỗi nếu có -->
+    <div th:if="${error} != null" class="alert alert-danger">
+        <strong>Error:</strong> <span th:text="${error}"></span>
+    </div>
+	
+	<div class="discount-add-container">
+        <h2>Add New Discount</h2>
+
+        <form th:action="@{/manager/discounts/add}" method="post">
+            <div class="form-group">
+                <label for="discountPercentage">Discount Percentage</label>
+                <input type="number" id="discountPercentage" name="discountPercentage" class="form-control" placeholder="Enter discount percentage" required min="0" max="100">
+            </div>
+            <div class="form-group">
+                <label for="code">Discount Code</label>
+                <input type="text" id="code" name="code" class="form-control" placeholder="Enter discount code" required>
+            </div>
+            <div class="form-group">
+                <label for="max_value">Max Value</label>
+                <input type="number" id="max_value" name="max_value" class="form-control" placeholder="Enter max value" required>
+            </div>
+            <div class="form-group">
+                <label for="validFrom">Valid From</label>
+                <input type="date" id="validFrom" name="validFrom" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="validUntil">Valid Until</label>
+                <input type="date" id="validUntil" name="validUntil" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-success">Add Discount</button>
+        </form>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        // Thêm hiệu ứng khi hover
+        $(document).ready(function() {
+            $('.form-control').focus(function() {
+                $(this).css('box-shadow', '0 0 5px rgba(127, 173, 57, 0.6)');
+            }).blur(function() {
+                $(this).css('box-shadow', 'none');
+            });
+        });
+        
+        
+        document.getElementById('validFrom').addEventListener('change', validateDates);
+        document.getElementById('validUntil').addEventListener('change', validateDates);
+
+        function validateDates() {
+            var validFrom = document.getElementById('validFrom').value;
+            var validUntil = document.getElementById('validUntil').value;
+
+            // Kiểm tra nếu ngày validFrom lớn hơn hoặc bằng validUntil
+            if (validFrom && validUntil && validFrom >= validUntil) {
+                alert("The 'Valid From' date must be earlier than the 'Valid Until' date.");
+                document.getElementById('validUntil').setCustomValidity("Invalid date range");
+            } else {
+                document.getElementById('validUntil').setCustomValidity(""); // Xóa lỗi nếu điều kiện đúng
+            }
+        }
+ 
+    </script>
+    
+    <div th:replace="~{fragment/footer :: footer}"></div>
+</body>
+</html>

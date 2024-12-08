@@ -1,0 +1,139 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.product-list-container{
+	width: 80%; /* Độ rộng của container */
+    margin: 0 auto; /* Căn giữa theo chiều ngang */
+    padding: 20px;
+    background-color: #f9f9f9; /* Màu nền nhạt */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+}
+h2 {
+    text-align: center;
+    color: #7FAD39;
+    margin-bottom: 20px;
+}
+
+.btn-add {
+    display: inline-block;
+    background-color: #7FAD39;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-add:hover {
+    background-color: #6c9f2b;
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: white;
+}
+
+.product-table th, 
+.product-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.product-table th {
+    background-color: #7FAD39;
+    color: white;
+}
+
+.product-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.product-table tr:hover {
+    background-color: #e6ffe6;
+}
+
+.btn-action {
+    padding: 5px 10px;
+    border-radius: 3px;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    margin-right: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-action.edit {
+    background-color: #4CAF50;
+}
+
+.btn-action.edit:hover {
+    background-color: #45a049;
+}
+
+.btn-action.delete {
+    background-color: #f44336;
+}
+
+.btn-action.delete:hover {
+    background-color: #da190b;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn-pagination {
+    background-color: #7FAD39;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-pagination:hover {
+    background-color: #6c9f2b;
+}
+
+.btn-pagination.active {
+    background-color: #6c9f2b;
+    font-weight: bold;
+    cursor: default;
+}
+/* Container slideshow */
+.slideshow-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}
+
+/* Ảnh trong slideshow */
+.slideshow-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Hiển thị ảnh hiện tại */
+.slideshow-image.active {
+    opacity: 1;
+}

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zxx"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ogani | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/elegant-icons.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/nice-select.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/slicknav.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+</head>
+
+<body>
+    <div th:replace="~{fragment/header :: header}"></div>
+
+    
+	<!-- Hiển thị thông báo -->
+	<div th:if="${message}" class="alert alert-success">
+	    <span th:text="${message}"></span>
+	</div>
+    
+
+    <!-- Hero Section Begin -->
+    <section class="hero hero-normal">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="#">
+                                <div class="hero__search__categories">
+                                    All Categories
+                                    <span class="arrow_carrot-down"></span>
+                                </div>
+                                <input type="text" placeholder="What do yo u need?">
+                                <button type="submit" class="site-btn">SEARCH</button>
+                            </form>
+                        </div>
+                        <div class="hero__search__phone">
+                            <div class="hero__search__phone__icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>+65 11.188.888</h5>
+                                <span>support 24/7 time</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Organi Shop</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Home</a>
+                            <span>Shop</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Product Section Begin -->
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-5">
+                    <div class="sidebar">
+                        <div class="sidebar__item">
+                            <h4>Thể Loại</h4>
+                            <ul>
+                                <li><a href="/shop-grid/category.name='food'">Đồ Ăn</a></li>
+                                <li><a href="/shop-grid/category.name='fruit'">Trái Cây</a></li>
+                                <li><a href="/shop-grid/category.name='drink'">Giải Khát</a></li>
+                                <li><a href="/shop-grid/category.name='dessert'">Tráng Miệng</a></li>                              
+                            </ul>
+                        </div>                      
+                    </div>
+                </div>
+                
+                
+                  
+                <div class="col-lg-9 col-md-7">
+    <div class="filter__item">
+        <div class="row">
+            <div class="col-lg-4 col-md-5">
+                <div class="filter__sort">
+                    <span>Sort By</span>
+                    <select>
+                        <option value="0">Name(A - Z)</option>
+                        <option value="1">Price(Low - High)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <div class="filter__found">
+                    <h6><span th:text="${products.size()}"></span> Products found</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Lặp qua tất cả các sản phẩm -->
+        <div th:each="product : ${products}" class="col-lg-4 col-md-6 col-sm-6">
+            <div class="product__item">
+                <div class="product__item__pic set-bg" th:data-setbg="@{${product.productImages.get(0).imageUrl}}">
+                    <ul class="product__item__pic__hover">
+                        <li>
+		                    <form th:action="@{/wishlist/add}" method="post">
+		                        <input type="hidden" name="productId" th:value="${product.id}"/>
+		                        <button type="submit" style="color: black; background: white; border: 2px solid #ccc; cursor: pointer; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+								    <i class="fa fa-heart"></i>
+								</button>
+		                    </form>
+		                </li>   
+		                
+		                <li>
+		                    <form th:action="@{/cart/add}" method="post">
+		                        <input type="hidden" name="productId" th:value="${product.id}"/>
+		                        <input type="hidden" name="quantity" th:value="${1L}"/>
+		                        <button type="submit" style="color: black; background: white; border: 2px solid #ccc; cursor: pointer; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+								    <i class="fa fa-shopping-cart"></i>
+								</button>
+		                    </form>
+		                </li>      
+		                          
+                        
+                    </ul>
+                </div>
+                <div class="product__item__text">
+                    <h6><a th:href="@{'/product/detail/' + ${product.id}}" th:text="${product.name}">Product Name</a></h6>
+                    <h5>[[${product.price} + ' VND']]</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="product__pagination">
+        <a th:if="${currentPage > 0}" th:href="@{/shop(page=${currentPage - 1})}">Previous</a>
+        <a th:each="pageNum : ${#numbers.sequence(0, totalPages - 1)}" 
+           th:classappend="${pageNum == currentPage} ? 'active' : ''" 
+           th:href="@{/shop(page=${pageNum})}">[[${pageNum + 1}]]</a>
+        <a th:if="${currentPage < totalPages - 1}" th:href="@{/shop(page=${currentPage + 1})}">Next</a>
+    </div>
+</div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Product Section End -->
+
+    <!-- Chèn footer -->
+	<div th:replace="~{fragment/footer :: footer}"></div>
+
+    <!-- Js Plugins -->
+    <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery.nice-select.min.js}"></script>
+    <script th:src="@{/js/jquery-ui.min.js}"></script>
+    <script th:src="@{/js/jquery.slicknav.js}"></script>
+    <script th:src="@{/js/mixitup.min.js}"></script>
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+
+
+
+</body>
+
+</html>

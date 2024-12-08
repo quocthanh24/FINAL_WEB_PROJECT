@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Product List</title>
+<link rel="stylesheet" th:href="@{/assets/css/manager/product/list.css}"
+	type="text/css">
+	
+		
+	<!-- Css Styles -->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/elegant-icons.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/nice-select.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/slicknav.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+	
+</head>
+<body>
+	<div th:replace="~{fragment/header :: header}"></div>
+<div class="product-list-container">
+	<h2>Product List</h2>
+
+	<!-- Nút Add Product -->
+	<a href="/manager/products/add" class="btn-add">Add New Product</a>
+
+	<!-- Bảng hiển thị sản phẩm -->
+	<table class="product-table">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Category</th>
+				<th>Images</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="product : ${products}">
+				<td th:text="${product.id}"></td>
+				<td th:text="${product.name}"></td>
+				<td th:text="${product.price}"></td>
+				<td th:text="${product.quantity}"></td>
+				<td th:text="${product.category.name}"></td>
+				<td>
+					<!-- Slideshow cho các ảnh sản phẩm -->
+					<div class="slideshow-container"
+						th:if="${product.productImages.size() > 0}">
+						<img th:each="image : ${product.productImages}"
+							th:src="${image.imageUrl}" alt="Product Image"
+							class="product-image slideshow-image" />
+					</div>
+				</td>
+				<td><a
+					th:href="@{/manager/products/edit/{id}(id=${product.id})}"
+					class="btn-action edit">Edit</a> <a
+					th:href="@{/manager/products/delete/{id}(id=${product.id})}"
+					class="btn-action delete"
+					th:onclick="|return confirm('Are you sure you want to delete this product?');|">Delete</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<!-- Phân trang -->
+	<div class="pagination">
+		<!-- Nút Previous -->
+		<span th:if="${products.hasPrevious()}">
+			<button class="btn-pagination"
+				th:onclick="|location.href='/manager/products?page=' + (${currentPage - 1})|">Previous</button>
+		</span>
+
+		<!-- Số trang -->
+		<span th:each="i : ${#numbers.sequence(1, totalPages)}">
+			<button class="btn-pagination"
+				th:onclick="|location.href='/manager/products?page=' + (${i})|"
+				th:text="${i}"
+				th:classappend="${i == currentPage + 1} ? 'active' : ''"></button>
+		</span>
+
+		<!-- Nút Next -->
+		<span th:if="${products.hasNext()}">
+			<button class="btn-pagination"
+				th:onclick="|location.href='/manager/products?page=' + (${currentPage + 1})|">Next</button>
+		</span>
+	</div>
+</div>	
+	<div th:replace="~{fragment/footer :: footer}"></div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+/* Đảm bảo body có chiều cao đầy đủ */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: block; /* Sử dụng display block thay vì flex */
+    
+}
+
+/* Định dạng cho container của form đăng ký */
+.register-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 450px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Định dạng cho tiêu đề */
+h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Định dạng cho các nhóm input trong form */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-group button {
+    width: 100%;
+    padding: 10px;
+    background-color: #7FAD39;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.form-group button:hover {
+    background-color: #6DD932;
+}
+
+/* Điều chỉnh header */
+header {
+    color: white;
+    padding: 0px 0px;  /* Tăng padding để tăng chiều cao */
+    font-size: 18px;  /* Điều chỉnh kích thước chữ */
+    text-align: center;
+}
+
+/* Điều chỉnh footer */
+footer {
+
+    color: white;
+    padding: 0px 0px;  /* Tăng padding để tăng chiều cao */
+    font-size: 18px;  /* Điều chỉnh kích thước chữ */
+    text-align: center;
+    margin-top: 30px;
+}
+
+
+
+

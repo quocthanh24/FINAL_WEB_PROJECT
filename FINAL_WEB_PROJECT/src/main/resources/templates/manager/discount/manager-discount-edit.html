@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Discount</title>
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/elegant-icons.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/nice-select.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/slicknav.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+
+    <link rel="stylesheet" th:href="@{/assets/css/manager/discount/edit.css}" type="text/css">
+</head>
+<body>
+    <div th:replace="~{fragment/header :: header}"></div>
+
+    <div class="discount-edit-container">
+        <h2>Edit Discount</h2>
+
+        <!-- Thêm thông báo lỗi nếu có -->
+        <div th:if="${error}" class="alert alert-danger">
+            <strong>Error:</strong> <span th:text="${error}"></span>
+        </div>
+
+        <form th:action="@{/manager/discounts/edit/{id}(id=${discount.id})}" method="post">
+            <div class="form-group">
+                <label for="discountPercentage">Discount Percentage</label>
+                <input type="number" id="discountPercentage" name="discountPercentage" class="form-control" 
+                    th:value="${discount.discountPercentage}" placeholder="Enter discount percentage" min="0" max="100" required>
+            </div>
+
+            <div class="form-group">
+                <label for="code">Discount Code</label>
+                <input type="text" id="code" name="code" class="form-control" 
+                    th:value="${discount.code}" placeholder="Enter discount code" required>
+            </div>
+
+            <div class="form-group">
+                <label for="max_value">Max Value</label>
+                <input type="number" id="max_value" name="max_value" class="form-control" 
+                    th:value="${discount.max_value}" placeholder="Enter max value" min="0" required>
+            </div>
+
+            <div class="form-group">
+                <label for="validFrom">Valid From</label>
+                <input type="date" id="validFrom" name="validFrom" class="form-control" 
+                    th:value="${discount.validFrom}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="validUntil">Valid Until</label>
+                <input type="date" id="validUntil" name="validUntil" class="form-control" 
+                    th:value="${discount.validUntil}" required>
+            </div>
+
+            <button type="submit" class="btn btn-success">Update Discount</button>
+        </form>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <div th:replace="~{fragment/footer :: footer}"></div>
+</body>
+</html>

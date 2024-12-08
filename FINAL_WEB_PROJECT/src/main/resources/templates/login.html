@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Đăng Nhập</title>
+<link rel="stylesheet" th:href="@{/assets/css/login.css}">
+
+<!-- Css Styles -->
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="css/nice-select.css" type="text/css">
+<link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="css/style.css" type="text/css">
+
+
+</head>
+<body>
+	<div th:replace="~{fragment/header :: header}"></div>
+
+	<div class="login-container">
+		<div class="login-box">
+			<h2>Đăng Nhập</h2>
+
+			
+
+			<form action="/login" method="POST">
+				<div class="textbox">
+					<input type="email" placeholder="Email" name="email" required>
+				</div>
+				<div class="textbox">
+					<input type="password" placeholder="Mật khẩu" name="password"
+						required>
+				</div>
+				<button type="submit" class="btn">Đăng Nhập</button>
+				
+				<!-- Hiển thị thông báo lỗi nếu có -->
+				<div th:if="${error}" class="alert alert-danger">
+					<span th:text="${error}"></span>
+				</div>
+			</form>
+
+			<div class="register-link">
+				<p>
+					Chưa có tài khoản? <a href="/register">Đăng ký ngay</a>
+				</p>
+				<p>
+					<a href="/forget-password">Quên mật khẩu?</a>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="~{fragment/footer :: footer}"></div>
+
+	<script th:src="@{/assets/js/login.js}"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+/* Cải tiến chung cho body */
+body {
+	background-color: #f4f4f4;
+	font-family: Arial, sans-serif;
+}
+
+h2 {
+	text-align: center;
+	margin-top: 10px;
+}
+
+/* Thiết kế form đẹp hơn */
+.category-add-container {
+	max-width: 600px;
+	background-color: #ffffff;
+	padding: 30px;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	margin: 20px auto;
+}
+
+.form-group {
+	margin-bottom: 20px; /* Khoảng cách đều giữa các form-group */
+}
+
+.form-group label {
+	font-size: 20px;
+}
+
+.form-group input {
+	margin-top: 10px; /* Khoảng cách giữa label và ô nhập liệu */
+	margin-left: 10px;
+}
+
+.form-group textarea {
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+.form-control {
+	border-radius: 4px;
+	font-size: 1rem;
+	padding: 10px;
+}
+
+.btn-success {
+	background-color: #7FAD39;
+	border: none;
+	padding: 10px 20px;
+	font-size: 1rem;
+	border-radius: 4px;
+	cursor: pointer;
+	width: 100%;
+	margin-left: 10px;
+}
+
+.btn-success:hover {
+	background-color: #6f9d2a;
+}
+
+/* Tạo hiệu ứng hover cho các input và button */
+.form-control:hover, .btn-success:hover {
+	border-color: #6f9d2a;
+}
+
+.btn-success:focus {
+	box-shadow: 0 0 5px rgba(127, 173, 57, 0.6);
+}
