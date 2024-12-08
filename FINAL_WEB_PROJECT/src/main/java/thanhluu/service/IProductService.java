@@ -14,6 +14,8 @@ public interface IProductService {
 	
 	public Page<ProductEntity> findAll(Pageable pageable);
 	
+	public Page<ProductEntity> findAllByCategory(String category,Pageable pageable);
+	
 	public ProductEntity save(ProductEntity product);
 	
 	public Optional<ProductEntity> findById(Long id);

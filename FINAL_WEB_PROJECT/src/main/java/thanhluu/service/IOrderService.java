@@ -1,6 +1,7 @@
 package thanhluu.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -15,4 +16,6 @@ public interface IOrderService {
 	public OrderEntity mergeOrder(OrderEntity order);
 	
 	public List<OrderEntity> findByUser(UserEntity user);
+	
+	public Optional<OrderEntity> findById(Long id);
 }

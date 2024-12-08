@@ -154,7 +154,7 @@
             <th>Id</th>
             <th>Order Date</th>
             <th>Total Amount</th>
-            <th>User</th>
+            
             
             <th>Status</th>
             <th>Actions</th>
@@ -165,19 +165,22 @@
             <td th:text="${order.id}"></td>
             <td th:text="${order.orderDate}"></td>
             <td th:text="${order.totalAmount}"></td>
-            <td th:text="${order.user.username}"></td>
             
-            <td th:text="${order.orderDetail.status}"></td>
+            
+            <td th:text="${order.orderDetail != null ? order.orderDetail.status : 'N/A'}"></td>
             <td>
-                <form th:action="@{/orders/cancel/{id}(id=${order.id})}" method="post">
-                    <button type="submit" class="btn btn-danger" th:disabled="${order.orderDetail.status == 'CANCELED'}">Hủy Đơn</button>
-                </form>
+                 <form th:action="@{/orders/cancel/{id}(id=${order.id})}" method="post">
+			        <button type="submit" class="btn btn-danger"
+			            th:disabled="${order.orderDetail != null && order.orderDetail.status == 'CANCELED'}">
+			            Hủy Đơn
+			        </button>
+			    </form>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
-<div th:replace="~{fragment/header :: header}"></div>
+<div th:replace="~{fragment/footer :: footer}"></div>
 
 </body>
 </html>

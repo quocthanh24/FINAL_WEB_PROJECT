@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -37,6 +38,21 @@ public class ShopController {
 		
 		Page<ProductEntity> productPage = iProductService.findAll(PageRequest.of(page, 9));
 		
+		System.out.println("DSGHlsgdfjgklajlghadhgdlh : " + productPage.getTotalElements());
+		
+		model.addAttribute("products", productPage.getContent());
+		model.addAttribute("totalProduct", productPage.getTotalElements());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", productPage.getTotalPages());
+		 
+	     return "shop-grid";
+	}
+	
+	@GetMapping("/{category}")
+	public String getMethodName(@PathVariable String category, 
+								@RequestParam(defaultValue = "0") int page,
+								Model model) {
+		Page<ProductEntity> productPage = iProductService.findAllByCategory(category, PageRequest.of(page, 9));
 		
 		
 		model.addAttribute("products", productPage.getContent());
@@ -44,6 +60,8 @@ public class ShopController {
         model.addAttribute("totalPages", productPage.getTotalPages());
 		 
 	     return "shop-grid";
+		
+		
 	}
 	
 	

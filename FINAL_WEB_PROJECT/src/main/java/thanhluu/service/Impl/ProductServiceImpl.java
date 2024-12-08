@@ -48,4 +48,10 @@ public class ProductServiceImpl implements IProductService{
 		return productRepository.findAll();
 	}
 
+	@Override
+	public Page<ProductEntity> findAllByCategory(String category, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return productRepository.findAllByCategory(category, pageable);
+	}
+
 }

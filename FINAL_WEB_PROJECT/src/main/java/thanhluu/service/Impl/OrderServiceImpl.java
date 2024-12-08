@@ -1,6 +1,7 @@
 package thanhluu.service.Impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,12 @@ public class OrderServiceImpl implements IOrderService{
 	public List<OrderEntity> findByUser(UserEntity user) {
 		// TODO Auto-generated method stub
 		return iOrderRepository.findByUser(user);
+	}
+
+	@Override
+	public Optional<OrderEntity> findById(Long id) {
+		// TODO Auto-generated method stub
+		return iOrderRepository.findById(id);
 	}
 
 	
