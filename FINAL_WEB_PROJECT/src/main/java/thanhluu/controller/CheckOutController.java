@@ -50,7 +50,7 @@ public class CheckOutController {
 		
 		UserEntity user = (UserEntity) session.getAttribute("user");
 		ShoppingCartEntity shoppingCart = (ShoppingCartEntity) session.getAttribute("shoppingCart");
-		OrderEntity order = (OrderEntity) session.getAttribute("order");
+		//OrderEntity order = (OrderEntity) session.getAttribute("order");
 		
 		if (user == null) {
 			
@@ -71,16 +71,27 @@ public class CheckOutController {
                                  .mapToLong(item -> item.getUnitPrice() * item.getQuantity())
                                  .sum();
         
-        if (order == null) {
-			order = new OrderEntity();
-			order.setUser(user);
-			order.setShoppingCart(shoppingCart);
-			order.setOrderDate(Date.valueOf(LocalDate.now()));
-			order.setTotalAmount(total);
-			
-			iOrderService.save(order);
-		}
+//        if (order == null) {
+//			order = new OrderEntity();
+//			order.setUser(user);
+//			order.setShoppingCart(shoppingCart);
+//			order.setOrderDate(Date.valueOf(LocalDate.now()));
+//			order.setTotalAmount(total);
+//			
+//			iOrderService.save(order);
+//		}
        
+        
+        
+        OrderEntity order = new OrderEntity();
+		order.setUser(user);
+		order.setShoppingCart(shoppingCart);
+		order.setOrderDate(Date.valueOf(LocalDate.now()));
+		order.setTotalAmount(total);
+		order.setTotalAmount(total);
+		order.setShoppingCart(shoppingCart);
+		iOrderService.save(order);
+		
         
         
         
@@ -96,9 +107,7 @@ public class CheckOutController {
 	        model.addAttribute("cartItems", cartItems);
 		}
         
-		order.setTotalAmount(total);
-		order.setShoppingCart(shoppingCart);
-		iOrderService.save(order);
+		
 		
 		session.setAttribute("order", order);
         

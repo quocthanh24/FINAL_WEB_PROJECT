@@ -54,7 +54,7 @@ public class ShopController {
 								Model model) {
 		Page<ProductEntity> productPage = iProductService.findAllByCategory(category, PageRequest.of(page, 9));
 		
-		
+		model.addAttribute("totalProduct", productPage.getTotalElements());
 		model.addAttribute("products", productPage.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", productPage.getTotalPages());

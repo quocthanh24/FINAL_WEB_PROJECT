@@ -51,6 +51,14 @@ public class OrderServiceImpl implements IOrderService{
 		return iOrderRepository.findById(id);
 	}
 
+	@Override
+	public List<OrderEntity> findByStatusNewAndDelivering() {
+		// TODO Auto-generated method stub
+		return iOrderRepository.findByStatusNewAndDelivering();
+	}
+
+	
+
 	
 
 	

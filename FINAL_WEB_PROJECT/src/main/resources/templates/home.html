@@ -71,7 +71,8 @@
 						<div class="categories__item set-bg"
 							data-setbg="img/categories/cat_04.jpg">
 							<h5>
-								<a href="#">Trái Cây</a>
+								<a th:if="${session.user != null}" th:href="@{/shop/fruit}">Trái Cây</a>
+								<a th:if="${session.user == null}" th:href="@{/login}">Trái Cây</a>
 							</h5>
 						</div>
 					</div>
@@ -79,7 +80,9 @@
 						<div class="categories__item set-bg"
 							data-setbg="img/categories/cat_02.jpg">
 							<h5>
-								<a href="#">Đồ Ăn</a>
+								<a th:if="${session.user != null}" th:href="@{/shop/food}">Đồ Ăn</a>
+								<a th:if="${session.user == null}" th:href="@{/login}">Đồ Ăn</a>
+								
 							</h5>
 						</div>
 					</div>
@@ -87,7 +90,9 @@
 						<div class="categories__item set-bg"
 							data-setbg="img/categories/cat_01.jpg">
 							<h5>
-								<a href="#">Giải Khát</a>
+								<a th:if="${session.user != null}" th:href="@{/shop/drink}">Giải Khát</a>
+								<a th:if="${session.user == null}" th:href="@{/login}">Giải Khát</a>
+								
 							</h5>
 						</div>
 					</div>
@@ -95,7 +100,8 @@
 						<div class="categories__item set-bg"
 							data-setbg="img/categories/cat_03.jpg">
 							<h5>
-								<a href="#">Tráng Miệng</a>
+								<a th:if="${session.user != null}" th:href="@{/shop/drink}">Giải Khát</a>
+								<a th:if="${session.user == null}" th:href="@{/login}">Giải Khát</a>
 							</h5>
 						</div>
 					</div>

@@ -18,4 +18,8 @@ public interface IOrderService {
 	public List<OrderEntity> findByUser(UserEntity user);
 	
 	public Optional<OrderEntity> findById(Long id);
+	
+	public List<OrderEntity> findByStatusNewAndDelivering();
+	
+	
 }
